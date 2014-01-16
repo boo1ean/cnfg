@@ -1,0 +1,20 @@
+{
+	"name": "cnfg",
+	"version": "0.0.1",
+	"description": "Hierarchical environment configuration for node.js applications",
+	"main": "cnfg.js",
+	"scripts": {
+		"test": "make test"
+	},
+	"repository": "https://github.com/boo1ean/cnfg.git",
+	"author": "Egor Gumenyuk <boo1ean0807@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/boo1ean/cnfg/issues"
+	},
+	"homepage": "https://github.com/boo1ean/cnfg",
+	"dependencies": {
+		"walkdir": "0.0.7",
+		"lodash": "~2.4.1"
+	}
+}
