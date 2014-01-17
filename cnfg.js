@@ -1,6 +1,5 @@
 var walk = require('walkdir')
   , resolve = require('path').resolve
-  , fs = require('fs')
   , _ = require('lodash');
 
 module.exports = function(path, env) {
@@ -25,7 +24,8 @@ module.exports = function(path, env) {
 		return function(file) {
 			var tokens = file.split('.');
 			var key = file.split('/')[pivot].split('.')[0];
-			config[key] = require(path + '/' + file);
+			var target = config[key] || {};
+			config[key] = _.extend(target, require(path + '/' + file));
 		}
 	}
 
