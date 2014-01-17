@@ -1,3 +1,4 @@
 module.exports = {
-	name: 'prod_johny'
+	name: 'prod_johny',
+	port: 5555
 }

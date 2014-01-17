@@ -27,9 +27,17 @@ describe('Hierarchical environment config extraction', function() {
 		var expected_prod = JSON.stringify({
 			'api': { key: 'prod_123' },
 			'app': { transport: 'http' },
-			'db': { name: 'prod_johny' }
+			'db': { name: 'prod_johny', port: 5555 }
 		});
 
 		JSON.stringify(cnfg(path, 'prod')).should.be.equal(expected_prod);
+
+		var expected_test = JSON.stringify({
+			'api': { key: '123', test_secret: 'wow such secret' },
+			'app': { transport: 'http' },
+			'db': { name: 'johny' }
+		});
+
+		JSON.stringify(cnfg(path, 'test')).should.be.equal(expected_test);
 	});
 });
