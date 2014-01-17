@@ -20,12 +20,12 @@
 		"config",
 		"settings",
 		"conf",
-		'recursive',
-		'recursively',
-		'environment',
-		'env',
-		'hierarchy',
-		'hierarchical'
+		"recursive",
+		"recursively",
+		"environment",
+		"env",
+		"hierarchy",
+		"hierarchical"
 	],
 	"devDependencies": {
 		"should": "~2.1.1",
