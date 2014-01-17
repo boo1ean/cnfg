@@ -13,7 +13,7 @@ module.exports = function(path, env) {
 	}
 
 	var onlyFiles = function(filepath) {
-		return filepath.match(/\..+$/);
+		return filepath.match(/\..+$/) && !endsWith(filepath, 'index.js');
 	}
 
 	var grouper = function(path) {
@@ -40,6 +40,11 @@ module.exports = function(path, env) {
 		if (str == null || starts == null) return false;
 		str = String(str); starts = String(starts);
 		return str.length >= starts.length && str.slice(0, starts.length) === starts;
+	}
+
+	var endsWith = function(string, suffix) {
+		var l  = string.length - suffix.length;
+		return l >= 0 && string.indexOf(suffix, l) === l;
 	}
 
 	files = walk.sync(path)
