@@ -7,7 +7,7 @@ module.exports = function(path, env) {
 	var length = path.length,
 	    config = {}, depth, files;
 
-	env = env || process.ENV;
+	env = env || process.env.NODE_ENV || 'development';
 
 	var relativePathTokens = function(filepath) {
 		return filepath.substr(length + 1);

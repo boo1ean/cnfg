@@ -38,7 +38,7 @@ And extracting whole config:
 var path = __dirname + '/config';
 var config = require('cnfg')(path);
 
-// All belows statements are true
+// All below statements are true
 config.db.host == 'localhost';
 config.api.secret == 'many secrets';
 ```
