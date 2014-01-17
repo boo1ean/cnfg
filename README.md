@@ -3,9 +3,13 @@ cnfg [![Build Status](https://travis-ci.org/boo1ean/cnfg.png?branch=master)](htt
 
 Hierarchical environment configuration for node.js applications
 
+## Installation
+
+	npm install cnfg
+
 ## Basic configuration
 
-Assuming configuration is stored somewhere under `config` directory which contains list of target specific configs:
+Assuming configuration is stored somewhere under `config` directory which contains list of component specific configs:
 
 ```
 config
@@ -31,7 +35,7 @@ module.exports = {
 }
 ```
 
-And extracting whole config:
+Extracting config:
 
 ```javascript
 // cnfg requires absolute path to the base config directory
@@ -47,7 +51,9 @@ config.api.secret == 'many secrets';
 
 It is often helpful to have different configuration values based on the environment the application is running in. For example, you may wish to use a different cache driver on your local development machine than on the production server. It is easy to accomplish this using environment based configuration.
 
-Simply create a folder within the config directory that matches your environment name, such as local. Next, create the configuration files you wish to override and specify the options for that environment. Here is example structure of environment-based config:
+Simply create a folder within the config directory that matches your environment name, such as `development` or `testing`. Next, create the configuration files you wish to override and specify the options for that environment.    
+
+Here is example structure of environment-based config:
 
 ```
 config
@@ -66,7 +72,7 @@ config
 |   `-- db.js
 ```
 
-Imagine we use passworded db connection only in production env, but all other stuff (dbname, user, etc.) is the same we can deal with it in the next way:
+Imagine we use passworded db connection only in `production` env, but all other stuff (dbname, user, etc.) is the same we can deal with it in the next way:
 
 Common db config:
 ```javascript
@@ -77,7 +83,7 @@ module.exports = {
 }
 ```
 
-Production db config:
+`production` db config:
 ```javascript
 // config/production/db.js
 module.exports = {
@@ -85,7 +91,7 @@ module.exports = {
 }
 ```
 
-Put config extractor to index.js for convenience
+Put config extractor to `index.js` in `config` folder for convenience
 ```javascript
 // config/index.js
 // Put index js in config base directory and whe you require config dir
