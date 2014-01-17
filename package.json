@@ -1,35 +1,35 @@
 {
-	"name": "cnfg",
-	"version": "0.1.0",
-	"description": "Hierarchical environment configuration for node.js applications",
-	"main": "cnfg.js",
-	"scripts": {
-		"test": "make test"
-	},
-	"repository": "https://github.com/boo1ean/cnfg.git",
-	"author": "Egor Gumenyuk <boo1ean0807@gmail.com>",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/boo1ean/cnfg/issues"
-	},
-	"homepage": "https://github.com/boo1ean/cnfg",
-	"dependencies": {
-		"lodash": "~2.4.1",
-		"walkdir": "0.0.7"
-	},
-	"keywords": [
-		"config",
-		"settings",
-		"conf",
-		"recursive",
-		"recursively",
-		"environment",
-		"env",
-		"hierarchy",
-		"hierarchical"
-	],
-	"devDependencies": {
-		"should": "~2.1.1",
-		"mocha": "~1.17.0"
-	}
+  "name": "cnfg",
+  "version": "0.1.0",
+  "description": "Hierarchical environment configuration for node.js applications",
+  "main": "cnfg.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": "https://github.com/boo1ean/cnfg.git",
+  "author": "Egor Gumenyuk <boo1ean0807@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/boo1ean/cnfg/issues"
+  },
+  "homepage": "https://github.com/boo1ean/cnfg",
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "walkdir": "0.0.7"
+  },
+  "keywords": [
+    "config",
+    "settings",
+    "conf",
+    "recursive",
+    "recursively",
+    "environment",
+    "env",
+    "hierarchy",
+    "hierarchical"
+  ],
+  "devDependencies": {
+    "mocha": "~1.17.0",
+    "chai": "~1.8.1"
+  }
 }
