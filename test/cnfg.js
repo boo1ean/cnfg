@@ -40,4 +40,26 @@ describe('Hierarchical environment config extraction', function() {
 
 		JSON.stringify(cnfg(path, 'test')).should.be.equal(expected_test);
 	});
+
+	it('Should extract configuration with index.js in base dir', function() {
+		var expected = JSON.stringify({
+			'api': { key: '123' },
+			'app': { transport: 'http' },
+			'db': { name: 'johny' }
+		});
+
+		JSON.stringify(require('./config-with-index')).should.be.equal(expected);
+	});
+
+	it('Should extract two-level configuration with index', function() {
+		var path = './config-two-levels-with-index';
+
+		var expected_prod = JSON.stringify({
+			'api': { key: 'prod_123' },
+			'app': { transport: 'http' },
+			'db': { name: 'prod_johny', port: 5555 }
+		});
+
+		JSON.stringify(require(path)).should.be.equal(expected_prod);
+	});
 });
