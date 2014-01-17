@@ -13,7 +13,7 @@ module.exports = function(path, env) {
 	}
 
 	var onlyFiles = function(filepath) {
-		return filepath.match(/\..+$/) && !endsWith(filepath, 'index.js');
+		return endsWith(filepath, '.js') && !endsWith(filepath, 'index.js');
 	}
 
 	var grouper = function(path) {
