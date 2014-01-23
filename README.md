@@ -61,15 +61,15 @@ config
 |-- app.js
 |-- db.js
 |-- index.js
-|-- development
+`-- development
 |   |-- api.js
 |   `-- db.js
 `-- test
-    `-- api.js
-|   `-- db.js
-|-- production
 |   |-- api.js
 |   `-- db.js
+`-- production
+    |-- api.js
+    `-- db.js
 ```
 
 Imagine we use passworded db connection only in `production` env, but all other stuff (dbname, user, etc.) is the same we can deal with it in the next way:
