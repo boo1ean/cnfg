@@ -1,5 +1,6 @@
 var walk = require('walkdir')
-  , resolve = require('path').resolve
+  , pathHelpers = require('path')
+  , resolve = pathHelpers.resolve
   , _ = require('lodash');
 
 module.exports = function(path, env) {
@@ -17,15 +18,15 @@ module.exports = function(path, env) {
 	}
 
 	var grouper = function(path) {
-		return path.split('/').length;
+		return path.split(pathHelpers.sep).length;
 	}
 
 	var extract = function(pivot) {
 		return function(file) {
 			var tokens = file.split('.');
-			var key = file.split('/')[pivot].split('.')[0];
+			var key = file.split(pathHelpers.sep)[pivot].split('.')[0];
 			var target = config[key] || {};
-			config[key] = _.extend(target, require(path + '/' + file));
+			config[key] = _.extend(target, require(path + pathHelpers.sep + file));
 		}
 	}
 
@@ -51,6 +52,7 @@ module.exports = function(path, env) {
 		.filter(onlyFiles)
 		.map(relativePathTokens);
 
+
 	files = _.groupBy(files, grouper);
 
 	depth = Object.keys(files).length;
@@ -61,7 +63,7 @@ module.exports = function(path, env) {
 	}
 
 	for (var i = 1; i < depth; ++i) {
-		findEnv(files[depth], envs.slice(0, i).join('/')).forEach(extract(i));
+		findEnv(files[depth], envs.slice(0, i).join(pathHelpers.sep)).forEach(extract(i));
 	}
 
 	return config;
