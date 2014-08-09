@@ -64,3 +64,39 @@ describe('Hierarchical environment config extraction', function() {
 		expect(require(path)).to.be.deep.equal(expected_prod);
 	});
 });
+
+describe('Configuration', function(){
+	it('Properties should not be changed', function(){
+		var path = __dirname + '/config-single-level';
+		var expected = {
+			'api': { key: '123' },
+			'app': { transport: 'http' },
+			'db': { name: 'johny' }
+		};
+
+		var config = cnfg(path);
+
+		expect(config).to.be.deep.equal(expected);
+
+		config.api = 1;
+
+		expect(config).to.be.deep.equal(expected);
+	});
+
+	it('May be extended with new properties', function(){
+		var path = __dirname + '/config-single-level';
+		var expected = {
+			'api': { key: '123' },
+			'app': { transport: 'http' },
+			'db': { name: 'johny' }
+		};
+
+		var config = cnfg(path);
+
+		expect(config).to.be.deep.equal(expected);
+
+		config.newProp = 1;
+
+		expect(config).to.have.property('newProp');
+	});
+});

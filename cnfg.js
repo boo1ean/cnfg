@@ -48,6 +48,17 @@ module.exports = function(path, env) {
 		return l >= 0 && string.indexOf(suffix, l) === l;
 	}
 
+	var generateDefinePropertiesOptions = function(){
+		var options = {};
+		for (var opt in config){
+			options[opt] = {
+				writable: false,
+				configurable: false
+			};
+		}
+		return options;
+	};
+
 	files = walk.sync(path)
 		.filter(onlyFiles)
 		.map(relativePathTokens);
@@ -66,5 +77,6 @@ module.exports = function(path, env) {
 		findEnv(files[depth], envs.slice(0, i).join(pathHelpers.sep)).forEach(extract(i));
 	}
 
+	Object.defineProperties(config, generateDefinePropertiesOptions());
 	return config;
 }
