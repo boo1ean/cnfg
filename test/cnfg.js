@@ -63,6 +63,18 @@ describe('Hierarchical environment config extraction', function() {
 
 		expect(require(path)).to.be.deep.equal(expected_prod);
 	});
+
+	it('Should apply overrides env correctly', function () {
+		var path = __dirname + '/config-with-env';
+
+		var expected = {
+			'api': { key: 'prod_123', key2: 'env key' },
+			'app': { transport: 'http' },
+			'db': { name: 'prod_johny', port: 5555 }
+		};
+
+		expect(cnfg(path, 'prod', { CNFG_API_KEY2: 'env key' })).to.be.deep.equal(expected);
+	})
 });
 
 describe('Configuration', function(){

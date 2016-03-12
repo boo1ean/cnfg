@@ -1,11 +1,13 @@
-var walk = require('walkdir')
-  , pathHelpers = require('path')
-  , resolve = pathHelpers.resolve
-  , _ = require('lodash');
+var walk = require('walkdir');
+var pathHelpers = require('path');
+var resolve = pathHelpers.resolve;
+var _ = require('lodash');
+var debug = require('debug')('cnfg');
 
-module.exports = function(path, env) {
-	var length = path.length,
-	    config = {}, depth, files;
+module.exports = function(path, env, processEnv) {
+	var length = path.length;
+	var config = {};
+	var depth, files;
 
 	env = env || process.env.NODE_ENV || 'development';
 
@@ -36,13 +38,6 @@ module.exports = function(path, env) {
 		});
 	}
 
-	var startsWith = function(str, starts) {
-		if (starts === '') return true;
-		if (str == null || starts == null) return false;
-		str = String(str); starts = String(starts);
-		return str.length >= starts.length && str.slice(0, starts.length) === starts;
-	}
-
 	var endsWith = function(string, suffix) {
 		var l  = string.length - suffix.length;
 		return l >= 0 && string.indexOf(suffix, l) === l;
@@ -59,6 +54,7 @@ module.exports = function(path, env) {
 		return options;
 	};
 
+	debug('walk path %s', path);
 	files = walk.sync(path)
 		.filter(onlyFiles)
 		.map(relativePathTokens);
@@ -77,6 +73,24 @@ module.exports = function(path, env) {
 		findEnv(files[depth], envs.slice(0, i).join(pathHelpers.sep)).forEach(extract(i));
 	}
 
-	Object.defineProperties(config, generateDefinePropertiesOptions());
+	return Object.defineProperties(applyEnvOverrides(config, processEnv || process.env), generateDefinePropertiesOptions());
+}
+
+function startsWith (str, starts) {
+	if (starts === '') return true;
+	if (str == null || starts == null) return false;
+	str = String(str); starts = String(starts);
+	return str.length >= starts.length && str.slice(0, starts.length) === starts;
+}
+
+function applyEnvOverrides (config, processEnv) {
+	Object.keys(processEnv).filter(function (name) {
+		return startsWith(name, 'CNFG');
+	}).forEach(function (override) {
+		var path = override.toLowerCase().split('_').slice(1);
+		debug('apply env override %s', path);
+		_.set(config, path, processEnv[override]);
+	});
+
 	return config;
 }

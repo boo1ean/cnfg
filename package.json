@@ -1,6 +1,6 @@
 {
   "name": "cnfg",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Hierarchical environment configuration for node.js applications",
   "main": "cnfg.js",
   "scripts": {
@@ -14,7 +14,8 @@
   },
   "homepage": "https://github.com/boo1ean/cnfg",
   "dependencies": {
-    "lodash": "~2.4.1",
+    "debug": "^2.2.0",
+    "lodash": "^4.6.1",
     "walkdir": "0.0.7"
   },
   "keywords": [

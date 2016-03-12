@@ -123,6 +123,22 @@ Also it is possible to specify environment manually passing it as seconf arg to 
 require('cnfg')(path_to_config, 'staging')
 ```
 
+## process.env overrides
+
+You can override config using `process.env` using this naming convention:
+
+```
+CNFG_DB_HOST=db.example.com
+```
+
+It will set `config.db.host` value.
+
+```
+CNFG_DB_CONNECTION_MASTER_HOST=master.db.example.com
+```
+
+will set `config.db.connection.master.host` value.
+
 # License
 
 The MIT License (MIT)
