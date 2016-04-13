@@ -1,3 +1,4 @@
 module.exports = {
-	key: 'prod_123'
+	key: 'prod_123',
+	underscored_key: 123
 }

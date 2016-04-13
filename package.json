@@ -1,6 +1,6 @@
 {
   "name": "cnfg",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Hierarchical environment configuration for node.js applications",
   "main": "cnfg.js",
   "scripts": {

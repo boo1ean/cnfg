@@ -128,16 +128,22 @@ require('cnfg')(path_to_config, 'staging')
 You can override config using `process.env` using this naming convention:
 
 ```
-CNFG_DB_HOST=db.example.com
+CNFG_DB__HOST=db.example.com
 ```
 
 It will set `config.db.host` value.
 
 ```
-CNFG_DB_CONNECTION_MASTER_HOST=master.db.example.com
+CNFG_DB__CONNECTION__MASTER__HOST=master.db.example.com
 ```
 
 will set `config.db.connection.master.host` value.
+
+```
+CNFG_DB__CONNECTION_URI=localhost@localhost
+```
+
+will set `config.db.connection_uri` value.
 
 # License
 

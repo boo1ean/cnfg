@@ -87,7 +87,8 @@ function applyEnvOverrides (config, processEnv) {
 	Object.keys(processEnv).filter(function (name) {
 		return startsWith(name, 'CNFG');
 	}).forEach(function (override) {
-		var path = override.toLowerCase().split('_').slice(1);
+		// Remove CNFG prefix
+		var path = override.toLowerCase().slice(5).split('__');
 		debug('apply env override %s', path);
 		_.set(config, path, processEnv[override]);
 	});

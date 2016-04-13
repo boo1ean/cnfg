@@ -68,12 +68,12 @@ describe('Hierarchical environment config extraction', function() {
 		var path = __dirname + '/config-with-env';
 
 		var expected = {
-			'api': { key: 'prod_123', key2: 'env key' },
+			'api': { key: 'prod_123', key2: 'env key', underscored_key: 456 },
 			'app': { transport: 'http' },
 			'db': { name: 'prod_johny', port: 5555 }
 		};
 
-		expect(cnfg(path, 'prod', { CNFG_API_KEY2: 'env key' })).to.be.deep.equal(expected);
+		expect(cnfg(path, 'prod', { CNFG_API__KEY2: 'env key', CNFG_API__UNDERSCORED_KEY: 456 })).to.be.deep.equal(expected);
 	})
 });
 
