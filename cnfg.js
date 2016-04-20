@@ -7,7 +7,7 @@ var debug = require('debug')('cnfg');
 module.exports = function(path, env, processEnv) {
 	var length = path.length;
 	var config = {};
-	var depth, files;
+	var depth, files, envs;
 
 	env = env || process.env.NODE_ENV || 'development';
 
