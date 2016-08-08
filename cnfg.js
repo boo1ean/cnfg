@@ -1,13 +1,26 @@
-var walk = require('walkdir');
-var pathHelpers = require('path');
-var resolve = pathHelpers.resolve;
-var _ = require('lodash');
-var debug = require('debug')('cnfg');
+var
+  pathHelpers = require('path'),
+  resolve = pathHelpers.resolve,
+  _ = require('lodash'),
+  debug = require('debug')('cnfg'),
+  walkDirSync = require('./walkDirSync');
 
-module.exports = function(path, env, processEnv) {
-	var length = path.length;
-	var config = {};
-	var depth, files, envs;
+function sanitizeExtensions(configuredExtensions) {
+  if (!configuredExtensions) {
+    return ['.js'];
+  }
+  return Array.isArray(configuredExtensions) 
+          ? configuredExtensions
+          : [configuredExtensions]; 
+}
+
+module.exports = function(path, env, processEnv, configFileExtensions) {
+	var
+    length = path.length,
+	  config = {},
+    depth, files, envs;
+
+  var extensions = sanitizeExtensions(configFileExtensions); 
 
 	env = env || process.env.NODE_ENV || 'development';
 
@@ -16,7 +29,13 @@ module.exports = function(path, env, processEnv) {
 	}
 
 	var onlyFiles = function(filepath) {
-		return endsWith(filepath, '.js') && !endsWith(filepath, 'index.js');
+    const fileExt = pathHelpers.extname(filepath);
+    if (extensions.indexOf(fileExt) === -1) {
+      return false;
+    }
+    var baseName = pathHelpers.basename(filepath);
+    var baseNameWithoutExtension = baseName.substr(0, baseName.length - fileExt.length);
+    return baseNameWithoutExtension !== 'index';
 	}
 
 	var grouper = function(path) {
@@ -55,7 +74,7 @@ module.exports = function(path, env, processEnv) {
 	};
 
 	debug('walk path %s', path);
-	files = walk.sync(path)
+	files = walkDirSync(path)
 		.filter(onlyFiles)
 		.map(relativePathTokens);
 
