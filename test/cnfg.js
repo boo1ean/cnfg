@@ -1,5 +1,5 @@
-var cnfg = require('../'),
-    expect = require('chai').expect;
+var cnfg = require('../');
+var expect = require('chai').expect;
 
 describe('Hierarchical environment config extraction', function() {
 	it('Should extract single-level config very well', function() {

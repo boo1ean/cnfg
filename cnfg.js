@@ -1,26 +1,24 @@
-var
-  pathHelpers = require('path'),
-  resolve = pathHelpers.resolve,
-  _ = require('lodash'),
-  debug = require('debug')('cnfg'),
-  walkDirSync = require('./walkDirSync');
+var pathHelpers = require('path');
+var resolve = pathHelpers.resolve;
+var _ = require('lodash');
+var debug = require('debug')('cnfg');
+var walkDirSync = require('./walkDirSync');
 
 function sanitizeExtensions(configuredExtensions) {
-  if (!configuredExtensions) {
-    return ['.js'];
-  }
-  return Array.isArray(configuredExtensions) 
-          ? configuredExtensions
-          : [configuredExtensions]; 
+	if (!configuredExtensions) {
+		return ['.js'];
+	}
+	return Array.isArray(configuredExtensions) 
+					? configuredExtensions
+					: [configuredExtensions]; 
 }
 
 module.exports = function(path, env, processEnv, configFileExtensions) {
-	var
-    length = path.length,
-	  config = {},
-    depth, files, envs;
+	var length = path.length;
+	var config = {};
+  var depth, files, envs;
 
-  var extensions = sanitizeExtensions(configFileExtensions); 
+	var extensions = sanitizeExtensions(configFileExtensions); 
 
 	env = env || process.env.NODE_ENV || 'development';
 
@@ -29,13 +27,13 @@ module.exports = function(path, env, processEnv, configFileExtensions) {
 	}
 
 	var onlyFiles = function(filepath) {
-    const fileExt = pathHelpers.extname(filepath);
-    if (extensions.indexOf(fileExt) === -1) {
-      return false;
-    }
-    var baseName = pathHelpers.basename(filepath);
-    var baseNameWithoutExtension = baseName.substr(0, baseName.length - fileExt.length);
-    return baseNameWithoutExtension !== 'index';
+		const fileExt = pathHelpers.extname(filepath);
+		if (extensions.indexOf(fileExt) === -1) {
+			return false;
+		}
+		var baseName = pathHelpers.basename(filepath);
+		var baseNameWithoutExtension = baseName.substr(0, baseName.length - fileExt.length);
+		return baseNameWithoutExtension !== 'index';
 	}
 
 	var grouper = function(path) {
@@ -58,7 +56,7 @@ module.exports = function(path, env, processEnv, configFileExtensions) {
 	}
 
 	var endsWith = function(string, suffix) {
-		var l  = string.length - suffix.length;
+		var l	= string.length - suffix.length;
 		return l >= 0 && string.indexOf(suffix, l) === l;
 	}
 
