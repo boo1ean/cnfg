@@ -4,19 +4,20 @@ var _ = require('lodash');
 var debug = require('debug')('cnfg');
 var walkDirSync = require('./walk-dir-sync');
 
-function sanitizeExtensions(configuredExtensions) {
+function sanitizeExtensions (configuredExtensions) {
 	if (!configuredExtensions) {
 		return ['.js'];
 	}
+
 	return Array.isArray(configuredExtensions) 
-					? configuredExtensions
-					: [configuredExtensions]; 
+		? configuredExtensions
+		: [configuredExtensions]; 
 }
 
 module.exports = function(path, env, processEnv, configFileExtensions) {
 	var length = path.length;
 	var config = {};
-  var depth, files, envs;
+	var depth, files, envs;
 
 	var extensions = sanitizeExtensions(configFileExtensions); 
 
@@ -28,9 +29,11 @@ module.exports = function(path, env, processEnv, configFileExtensions) {
 
 	var onlyFiles = function(filepath) {
 		const fileExt = pathHelpers.extname(filepath);
+
 		if (extensions.indexOf(fileExt) === -1) {
 			return false;
 		}
+
 		var baseName = pathHelpers.basename(filepath);
 		var baseNameWithoutExtension = baseName.substr(0, baseName.length - fileExt.length);
 		return baseNameWithoutExtension !== 'index';
@@ -76,9 +79,7 @@ module.exports = function(path, env, processEnv, configFileExtensions) {
 		.filter(onlyFiles)
 		.map(relativePathTokens);
 
-
 	files = _.groupBy(files, grouper);
-
 	depth = Object.keys(files).length;
 	envs = env.split('-');
 
