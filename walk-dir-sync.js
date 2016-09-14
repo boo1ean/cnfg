@@ -1,4 +1,4 @@
-var	pathHelpers = require('path');
+var pathHelpers = require('path');
 var debug = require('debug')('cnfg');
 var fs = require('fs');
 
