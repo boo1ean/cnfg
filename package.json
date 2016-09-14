@@ -4,7 +4,7 @@
   "description": "Hierarchical environment configuration for node.js applications",
   "main": "cnfg.js",
   "scripts": {
-    "test": "make test"
+    "test": "./node_modules/mocha/bin/_mocha -R spec test --recursive"
   },
   "repository": "https://github.com/boo1ean/cnfg.git",
   "author": "Egor Gumenyuk <boo1ean0807@gmail.com>",
@@ -15,8 +15,7 @@
   "homepage": "https://github.com/boo1ean/cnfg",
   "dependencies": {
     "debug": "^2.2.0",
-    "lodash": "^4.6.1",
-    "walkdir": "0.0.7"
+    "lodash": "^4.6.1"
   },
   "keywords": [
     "config",
@@ -30,7 +29,12 @@
     "hierarchical"
   ],
   "devDependencies": {
-    "mocha": "~1.17.0",
-    "chai": "~1.8.1"
+    "chai": "~1.8.1",
+    "mocha": "^3.0.1",
+    "mocha-yar": "^1.0.10",
+    "npm-run-all": "^2.3.0",
+    "ts-node": "^1.2.2",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2"
   }
 }
