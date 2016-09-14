@@ -2,7 +2,7 @@ var pathHelpers = require('path');
 var resolve = pathHelpers.resolve;
 var _ = require('lodash');
 var debug = require('debug')('cnfg');
-var walkDirSync = require('./walkDirSync');
+var walkDirSync = require('./walk-dir-sync');
 
 function sanitizeExtensions(configuredExtensions) {
 	if (!configuredExtensions) {

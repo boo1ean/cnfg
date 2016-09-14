@@ -4,21 +4,22 @@ var fs = require('fs');
 
 function isDirectory(path) {
 	try {
-		var info = fs.lstatSync(path);
-		return info.isDirectory();
+		return fs.lstatSync(path).isDirectory();
 	} catch (ignore) {
 		return false;
 	}
 }
 
-module.exports = function walkDirSync(path) {
+module.exports = function walkDirSync (path) {
 	try {
-		debug('read contents of dir: ', path);
-		var
-			contents = fs.readdirSync(path),
-			result = []
+		debug('read contents of dir: %s', path);
+
+		var contents = fs.readdirSync(path);
+		var result = [];
+
 		contents.forEach(function (item) {
 			var fullPath = pathHelpers.join(path, item);
+
 			if (isDirectory(fullPath)) {
 				var subContents = walkDirSync(fullPath);
 				result.push.apply(result, subContents);
@@ -26,7 +27,7 @@ module.exports = function walkDirSync(path) {
 				result.push(fullPath);
 			}
 		})
-		debug('found ', result.length, ' items under ', path);
+		debug('found %s items under %s', result.length, path);
 		return result;
 	} catch (ignore) {
 		return []
