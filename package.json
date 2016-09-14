@@ -4,14 +4,7 @@
   "description": "Hierarchical environment configuration for node.js applications",
   "main": "cnfg.js",
   "scripts": {
-    "prepublish": "run-s test",
-    "test": "run-s test-js test-ts",
-    "test-js": "mocha -R spec test --recursive",
-    "test-ts": "mocha -R spec test-ts/**/*.spec.ts --require ts-node/register --recursive",
-    "autotest-ts": "mocha -R mocha-yar test-ts/**/*.spec.ts --require ts-node/register --recursive --watch --watch-extensions ts",
-    "autotest-js": "mocha -R mocha-yar test --recursive --watch",
-    "autotest": "run-p autotest-js autotest-ts",
-    "postinstall": "typings install"
+    "test": "./node_modules/mocha/bin/_mocha -R spec test --recursive"
   },
   "repository": "https://github.com/boo1ean/cnfg.git",
   "author": "Egor Gumenyuk <boo1ean0807@gmail.com>",
